@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../../style/screen.css" type="text/css"/>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed"
+      href="{{feedPath}}"/>
+    <meta name="author" content="Klaus Trainer"/>
+    <meta name="keywords" content="Klaus Trainer"/>
+    <meta name="description" content="Klaus Trainer's blog"/>
+  </head>
+  <body>
+    {{>header}}
+    <div id="content">
+      <div id="container">
+        {{#posts}}
+          <h1><a href="{{link}}">{{title}}</a></h1>
+          <div class="storydate">
+            posted <span class="date">{{date}}</span> by {{author}}
+          </div>
+          <div class="story">
+            {{{body}}}
+          </div>
+          <div class="storyfooter">
+            ( <a href="{{link}}">Comments</a>
+              (<span id="{{id}}">0</span>)
+              {{#has_tags}}
+                <span class="storytags">
+                  | Tags:
+                  {{#tags}}
+                    <a href="{{link}}">{{tag}}</a>
+                  {{/tags}}
+                </span>
+              {{/has_tags}}
+            )
+          </div>
+        {{/posts}}
+        <div class="paginate">
+          <a href="{{older}}">older posts</a>
+          <a href="{{5}}">5</a>
+          <a href="{{10}}">10</a>
+          <a href="{{25}}">25</a>
+        </div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <h2>Tags</h2>
+      <ul>
+        <li>
+          <div id="tagcloud"></div>
+        </li>
+      </ul>
+      <h2>Archives</h2>
+      <ul>
+        <li>
+          <div id="archives"></div>
+        </li>
+      </ul>
+      <h2>Feeds (Atom)</h2>
+      <ul>
+        <li><a href="{{feedPath}}">Posts</a></li>
+        <li><a href="{{commentsFeed}}">Comments</a></li>
+      </ul>
+    </div>
+  </body>
+  {{>scripts}}
+  <script>
+    $.couch.app(function() {
+      $("#tagcloud").evently(this.ddoc.evently.tagcloud, this)
+      $("#archives").evently(this.ddoc.evently.archives, this)
+    })
+    $.get("../../_view/comment-count?group=true", function(data) {
+      $.each(JSON.parse(data).rows, function(i, row) {
+        $('#' + row.key).html(row.value)
+      })
+    })
+  </script>
+</html>

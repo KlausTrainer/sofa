@@ -1,0 +1,1 @@
+{"name": "markdown", "lib": "lib", "author": "John Fraser", "dependencies": [], "contributors": ["John Gruber", "George Moschovitis", "Kris Kowal"], "keywords": ["markdown", "markup"], "description": "A port of markdown to JavaScript"}

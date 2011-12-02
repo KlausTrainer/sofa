@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="../../style/screen.css" type="text/css">
+    <meta name="author" content="Klaus Trainer" />
+    <meta name="keywords" content="Klaus Trainer" />
+    <meta name="description" content="Klaus Trainer's blog" />
+  </head>
+  <body>
+    {{>header}}
+    <div id="content">
+      <div id="container">
+        <h3><a href="{{link}}">{{post_title}}</a></h3>
+        <div id="post">
+          <div class="storydate">
+            posted <span class="date">{{date}}</span> by {{author}}
+          </div>
+          <div class="story">
+            <p>{{{html}}}</p>
+          </div>
+        </div>
+        <div class="storyfooter">
+            {{#has_tags}}
+              (
+              <span class="storytags">
+                Tags:
+                {{#tags}}
+                  <a href="{{link}}">{{tag}}</a>
+                {{/tags}}
+              </span>
+              )
+            {{/has_tags}}
+        </div>
+        <div id="tags"></div>
+        <div id="comments">
+          <ul>
+            {{#comments}}
+              {{>comment}}
+            {{/comments}}
+          </ul>
+          <div id="profile"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  {{>scripts}}
+  <script src="../../script/jquery.scrollTo.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  $.CouchApp(function(app) {
+    $("#profile").evently($.extend(true, {}, app.ddoc.vendor.couchapp.evently.profile, app.ddoc.evently.profile), app)
+    $.evently.connect($("#account"), $("#profile"), ["loggedIn", "loggedOut"])
+  })
+  </script>
+</html>

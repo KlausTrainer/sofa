@@ -1,0 +1,14 @@
+{{#year_archives}}
+  <div class="archiveYear"><a href="{{year_link}}">{{year}}</a> ({{count}})</div>
+  <div>
+    {{#month_archives}}
+    <div class="archiveMonth"><a href="{{month_link}}">{{month_name}}</a> ({{count}})</div>
+    <div>
+      {{#posts}}
+        <div class="archivePost">∙&nbsp;&nbsp;<a href="{{link}}">{{title}}</a></div>
+      {{/posts}}
+    </div>
+    {{/month_archives}}
+  </div>
+{{/year_archives}}
+<script>new Archives('archiveYear', 'archiveMonth')</script>

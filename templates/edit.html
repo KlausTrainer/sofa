@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{assets}}/style/screen.css" type="text/css">
+  </head>
+  <body>
+    {{>header}}
+    <div id="tagcloud"></div>
+    <div id="content">
+    <!-- form to create a post -->
+    <form id="new-post" action="new.html" method="post">
+      <h3>{{pageTitle}}</h3>
+      <p><label for="title">Title</label>
+      <input type="text" size="50" name="title" value=""></p>
+      <p><label for="body">Body</label>
+      <textarea name="body" rows="20" cols="80"></textarea></p>
+      <p>
+        <label for="tags">Click tags to add them. (split by ',')</label>
+        <input size="50" type="text" name="tags" value="" id="tags">
+      </p>
+      <p>
+        <input id="preview" class="button" type="button" value="Preview"/>
+        <input type="submit" class="button" value="Save &rarr;"/>
+        <span id="saved" style="display:none;">Saved</span>
+        </p>
+    </form>
+      <div id="show-preview"></div>
+    </div>
+  </body>
+  {{>scripts}}
+  <script src="../../script/jquery.scrollTo.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    $.couch.app(function(app) {
+      // extend the tagcloud so that clicks add tags to the current post
+      var tagcloud = $.extend(true, {}, this.ddoc.evently.tagcloud, {
+        _init : {
+          selectors : {
+            a : {
+              click : function() {
+                var tag = $(this).text()
+                var tags = $("input[name=tags]").val()
+                if (tags) {
+                  tags = tags + ", "
+                }
+                $("input[name=tags]").val(tags + tag)
+                return false
+              }
+            }
+          }
+        }
+      })
+      $("#tagcloud").evently(tagcloud, this)
+
+        var path = app.require("vendor/couchapp/lib/path").init(app.req)
+        var postForm, blog = app.require("lib/blog")
+
+        // apply docForm at login.
+        $("#account").evently({
+          loggedIn : function(e,r) {
+            var userCtx = r.userCtx
+            postForm = app.docForm("form#new-post", {
+              id : {{ docid }},
+              fields : ["title", "body", "tags"],
+              template : {
+                type : "post",
+                format : "markdown",
+                author : userCtx.name
+              },
+              onLoad : function(doc) {
+                if (doc._id) {
+                  $('h1').html('Editing <a href="' + path.show('post', doc._id) + '">' + doc._id + '</a> by ' +doc.author)
+                  $('#preview').before('<input type="button" class="button" id="delete" value="Delete Post"/> ')
+                  $("#delete").click(function() {
+                    postForm.deleteDoc({
+                      success: function(resp) {
+                        $("h1").text("Deleted " + resp.id)
+                        $('form#new-post input').attr('disabled', true)
+                      }
+                    })
+                    return false
+                  })
+                }
+                var format = doc.format == "markdown" ? "<a href=\"http://warpedvisions.org/projects/markdown-cheat-sheet/\">Markdown</a>" : doc.format || 'html'
+                $('label[for=body]').append(' <em>with ' + format + '</em>')
+              },
+              beforeSave : function(doc) {
+                if (!doc.created_at) {
+                  doc.created_at = new Date()
+                }
+                if (!doc._id) {
+                  doc._id = blog.slugifyString(doc.title)
+                }
+                if(doc.tags) {
+                  doc.tags = doc.tags.split(",")
+                  for(var idx in doc.tags) {
+                    doc.tags[idx] = $.trim(doc.tags[idx])
+                  }
+                }
+              },
+              success : function(resp) {
+                $("#saved").text("Saved _rev: " + resp.rev).fadeIn(500).fadeOut(6000)
+                $('h1').html('Editing <a href="' + path.show('post',resp.id) + '">' + resp.id + '</a> by ' + doc.author)
+              }
+            })
+          }
+        })
+
+        $("#preview").click(function() {
+          var markdown = app.require("vendor/markdown/lib/markdown")
+          var doc = postForm.localDoc()
+          var html = markdown.encode(doc.body)
+          $('#show-preview').html(html)
+          $('body').scrollTo('#show-preview', {duration: 500})
+        })
+      })
+  </script>
+</html>
