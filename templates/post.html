@@ -1,16 +1,10 @@
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="../../style/screen.css" type="text/css">
-    <meta name="author" content="Klaus Trainer" />
-    <meta name="keywords" content="Klaus Trainer" />
-    <meta name="description" content="Klaus Trainer's blog" />
-  </head>
+  {{>head}}
   <body>
     {{>header}}
     <div id="content">
       <div id="container">
-        <h3><a href="{{link}}">{{post_title}}</a></h3>
+        <h3><a href="{{link}}">{{title}}</a></h3>
         <div id="post">
           <div class="storydate">
             posted <span class="date">{{date}}</span> by {{author}}
@@ -18,18 +12,22 @@
           <div class="story">
             <p>{{{html}}}</p>
           </div>
-        </div>
-        <div class="storyfooter">
-            {{#has_tags}}
-              (
-              <span class="storytags">
-                Tags:
-                {{#tags}}
-                  <a href="{{link}}">{{tag}}</a>
-                {{/tags}}
-              </span>
-              )
-            {{/has_tags}}
+          <div class="storyfooter">
+            <a href="{{link}}">Comments</a>
+              (<span id="{{id}}">0</span>)
+              {{#has_tags}}
+                <span class="storytags">
+                  &nbsp;<b>|</b>&nbsp; Tags:
+                  {{#tags}}
+                    <a href="{{link}}">{{tag}}</a>
+                  {{/tags}}
+                </span>
+              {{/has_tags}}
+            &nbsp;<b>|</b>&nbsp;&nbsp;
+            <span style="position: absolute;">
+              <a class="FlattrButton" style="display: none;" href="{{uri}}" data-flattr-title="{{title}}" data-flattr-tags="{{tags_string}}" data-flattr-category="text"></a><noscript><a href="http://flattr.com/thing/469480/foo" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr '{{title}}' by {{autor}}!" title="Flattr '{{title}}' by {{autor}}!" /></a></noscript>
+            </span>
+          </div>
         </div>
         <div id="tags"></div>
         <div id="comments">
@@ -46,9 +44,16 @@
   {{>scripts}}
   <script src="../../script/jquery.scrollTo.js"></script>
   <script type="text/javascript" charset="utf-8">
-  $.CouchApp(function(app) {
-    $("#profile").evently($.extend(true, {}, app.ddoc.vendor.couchapp.evently.profile, app.ddoc.evently.profile), app)
-    $.evently.connect($("#account"), $("#profile"), ["loggedIn", "loggedOut"])
-  })
+    /* <![CDATA[ */
+    $.couch.app(function(app) {
+      $("#profile").evently($.extend(true, {}, app.ddoc.vendor.couchapp.evently.profile, app.ddoc.evently.profile), app)
+      $.evently.connect($("#account"), $("#profile"), ["loggedIn", "loggedOut"])
+    })
+    $.get("../../_view/comment-count?group=true", function(data) {
+      $.each(JSON.parse(data).rows, function(i, row) {
+        $('#' + row.key).html(row.value)
+      })
+    })
+    /* ]]> */
   </script>
 </html>

@@ -86,6 +86,7 @@ blockquote { font-style: italic; }
 }
 #content .story {
 	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
 	margin-bottom: 40px;
 }
 #content .storydate {
@@ -96,7 +97,7 @@ blockquote { font-style: italic; }
 #content .storyfooter {
 	font-size: 14px;
 	color: #262626;
-	margin: -20px 0px 40px 0px;
+	margin: -22px 0px 36px 8px;
 }
 #content .storytags {
 }

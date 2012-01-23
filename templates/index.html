@@ -1,13 +1,5 @@
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="../../style/screen.css" type="text/css"/>
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed"
-      href="{{feedPath}}"/>
-    <meta name="author" content="Klaus Trainer"/>
-    <meta name="keywords" content="Klaus Trainer"/>
-    <meta name="description" content="Klaus Trainer's blog"/>
-  </head>
+  {{>head}}
   <body>
     {{>header}}
     <div id="content">
@@ -21,17 +13,20 @@
             {{{body}}}
           </div>
           <div class="storyfooter">
-            ( <a href="{{link}}">Comments</a>
+            <a href="{{link}}">Comments</a>
               (<span id="{{id}}">0</span>)
               {{#has_tags}}
                 <span class="storytags">
-                  | Tags:
+                  &nbsp;<b>|</b>&nbsp; Tags:
                   {{#tags}}
                     <a href="{{link}}">{{tag}}</a>
                   {{/tags}}
                 </span>
               {{/has_tags}}
-            )
+            &nbsp;<b>|</b>&nbsp;&nbsp;
+            <span style="position: absolute;">
+              <a class="FlattrButton" style="display: none;" href="{{uri}}" data-flattr-title="{{title}}" data-flattr-tags="{{tags_string}}" data-flattr-category="text"></a><noscript><a href="http://flattr.com/thing/469480/foo" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr '{{title}}' by {{autor}}!" title="Flattr '{{title}}' by {{autor}}!" /></a></noscript>
+            </span>
           </div>
         {{/posts}}
         <div class="paginate">
@@ -63,7 +58,8 @@
     </div>
   </body>
   {{>scripts}}
-  <script>
+  <script type="text/javascript">
+  /* <![CDATA[ */
     $.couch.app(function() {
       $("#tagcloud").evently(this.ddoc.evently.tagcloud, this)
       $("#archives").evently(this.ddoc.evently.archives, this)
@@ -73,5 +69,6 @@
         $('#' + row.key).html(row.value)
       })
     })
+  /* ]]> */
   </script>
 </html>
