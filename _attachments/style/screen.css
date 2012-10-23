@@ -24,16 +24,14 @@
 }
 
 body {
+  font-family: 'Vollkorn', serif;
+  font-size: 18px;
   margin-top: 0px;
   margin-left: 22px;
   background: #fffbf0 url("../images/corner.png") top left no-repeat;
 }
 
-#account {
-  font-size: 14px;
-  text-shadow: #fff 0 0 4px;
-  float: right;
-}
+body code { font-size: 16px }
 
 a {
   color: blue;
@@ -47,9 +45,16 @@ a:hover, a:focus, a:active {background-color: transparent; color: inherit; text-
 
 blockquote { font-style: italic; }
 
+#account {
+  font-size: 15px;
+  line-height: 18px;
+  text-shadow: #fff 0 0 4px;
+  float: right;
+}
+
 #header {
-  background-color: transparent;
   font-family: Fixed, Courier, monospace;
+  background-color: transparent;
   font-weight: bold;
   font-size: 18px;
   color: #000099;
@@ -58,7 +63,7 @@ blockquote { font-style: italic; }
 
 #container {
   width: 100%;
-  padding: 4px 38px 0px 39px;
+  padding: 4px 38px 0px 40px;
   color: #161616;
   background-color: #fffef8;
 }
@@ -69,20 +74,18 @@ blockquote { font-style: italic; }
 
 /******** Content variations ********/
 #content {
-  font-family: 'Vollkorn', serif;
-  font-size: 16px;
   position: absolute;
   text-align: justify;
-  width: 60%
+  width: 62%
 }
 #content h1 {
-  font-size: 19px;
+  font-size: 20px;
 }
 #content h2 {
-  font-size: 18px;
+  font-size: 19px;
 }
 #content h3 {
-  font-size: 17px;
+  font-size: 18px;
 }
 #content .story {
   border-top: 1px solid silver;
@@ -90,13 +93,13 @@ blockquote { font-style: italic; }
   margin-bottom: 40px;
 }
 #content .storydate {
-  font-size: 14px;
+  font-size: 15px;
   color: #595959;
   margin-bottom: 8px;
 }
 #content .storyfooter {
   position: relative;
-  font-size: 14px;
+  font-size: 15px;
   color: #262626;
   margin: -22px 0px 36px 8px;
 }
@@ -107,32 +110,31 @@ blockquote { font-style: italic; }
 }
 #content .storyfooter .flattr  {
   position: absolute;
-  top: 14px;
+  top: 15px;
 }
 
 /******** sidebar ********/
 
 #sidebar {
   font-family: 'Vollkorn', serif;
-  font-size: 16px;
   float: left;
   position: absolute;
-  width: 29%;
+  width: 28%;
   right: 22px;
-  top: 75px;
-}
-#sidebar ul {
-  font-size: 14px;
-  list-style: none;
-  margin: 0;
-  padding: 0 0 15px 10px;
+  top: 90px;
 }
 #sidebar h2 {
+  font-size: 18px;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
   color: #000066;
   background-color: transparent;
   margin: 8px 0px 8px 0px;
+}
+#sidebar ul {
+  font-size: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 15px 10px;
 }
 
 .tags {
@@ -213,7 +215,7 @@ img.gravatar {
 
 .paginate {
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 16px;
 }
 
@@ -255,12 +257,12 @@ textarea {
   font-weight: bold;
 }
 .smallestTag:link, .smallestTag:visited {
-  font-size: 8px;
+  font-size: 9px;
   color: #c9c9c9;
   background: transparent;
 }
 .smallTag:link, .smallTag:visited {
-  font-size: 10px;
+  font-size: 11px;
   color: #aaaaaa;
   background: white;
 }
@@ -275,7 +277,7 @@ textarea {
   background: white;
 }
 .biggestTag:link, .biggestTag:visited {
-  font-size: 14px;
+  font-size: 15px;
   color: #555555;
   background: white;
 }
