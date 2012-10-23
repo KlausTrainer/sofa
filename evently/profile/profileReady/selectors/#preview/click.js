@@ -9,7 +9,8 @@ function() {
     html : markdown.encode(Mustache.escape($("#comment").val())),
     created_at : JSON.parse(JSON.stringify(new Date()))
   }
-  
-  $("#comment-preview").html(Mustache.to_html(app.ddoc.templates.partials.comment, c))
+
+  $('#comment-preview').html(Mustache.to_html(app.ddoc.templates.partials.comment, c))
+  $('.date').prettyDate();
   $('body').scrollTo('#comment-preview', {duration: 500})
 }
