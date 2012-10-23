@@ -13,19 +13,18 @@
             {{{body}}}
           </div>
           <div class="storyfooter">
-            <a href="{{link}}">Comments</a>
-              (<span id="{{id}}">0</span>)
-              {{#has_tags}}
-                <span class="storytags">
-                  &nbsp;<b>|</b>&nbsp; Tags:
-                  {{#tags}}
-                    <a href="{{link}}">{{tag}}</a>
-                  {{/tags}}
-                </span>
-              {{/has_tags}}
+            <a href="{{link}}">Comments</a> (<span id="{{id}}">0</span>)
+            {{#has_tags}}
+              <span class="storytags">
+                &nbsp;<b>|</b>&nbsp; Tags:
+                {{#tags}}
+                  <a href="{{link}}">{{tag}}</a>
+                {{/tags}}
+              </span>
+            {{/has_tags}}
             &nbsp;<b>|</b>&nbsp;&nbsp;
-            <span style="position: absolute;">
-              <a class="FlattrButton" style="display: none;" href="{{uri}}" data-flattr-title="{{title}}" data-flattr-tags="{{tags_string}}" data-flattr-category="text"></a><noscript><a href="http://flattr.com/thing/469480/foo" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr '{{title}}' by {{autor}}!" title="Flattr '{{title}}' by {{autor}}!" /></a></noscript>
+            <span class="flattr">
+              <a class="FlattrButton" style="display: none;" href="{{uri}}" data-flattr-title="{{title}}" data-flattr-tags="{{tags_string}}" data-flattr-category="text"></a><noscript><a href="http://flattr.com/thing/470309/Klaus-Trainers-blog" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr '{{title}}' by {{autor}}!" title="Flattr '{{title}}' by {{autor}}!" /></a></noscript>
             </span>
           </div>
         {{/posts}}
