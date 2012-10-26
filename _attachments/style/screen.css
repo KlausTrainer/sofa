@@ -34,13 +34,12 @@ body {
 body code { font-size: 16px }
 
 a {
-  color: blue;
   background-color: transparent;
   font-weight: bold;
   text-decoration: none;
 }
 a:link {background-color: transparent; color: #116611;}
-a:visited {background-color: transparent; color: #003b2a}
+a:visited {background-color: transparent; color: #116611}
 a:hover, a:focus, a:active {background-color: transparent; color: inherit; text-decoration: underline;}
 
 blockquote { font-style: italic; }
@@ -63,7 +62,7 @@ blockquote { font-style: italic; }
 
 #container {
   width: 100%;
-  padding: 4px 38px 0px 40px;
+  padding: 0px 38px 0px 40px;
   color: #161616;
   background-color: #fffef8;
 }
@@ -79,19 +78,19 @@ blockquote { font-style: italic; }
   width: 62%
 }
 #content h1 {
-  font-size: 20px;
-}
-#content h2 {
   font-size: 19px;
 }
-#content h3 {
+#content h2 {
   font-size: 18px;
+}
+#content h3 {
+  font-size: 17px;
 }
 #content .story {
   border-top: 1px solid silver;
   border-bottom: 1px solid silver;
-  margin-bottom: 40px;
 }
+#content .story a { font-weight: normal }
 #content .storydate {
   font-size: 15px;
   color: #595959;
@@ -101,7 +100,7 @@ blockquote { font-style: italic; }
   position: relative;
   font-size: 15px;
   color: #262626;
-  margin: -22px 0px 36px 8px;
+  margin: 8px 0px 33px 0px;
 }
 #content .storyfooter .storytags a:hover {
   text-decoration: none;
